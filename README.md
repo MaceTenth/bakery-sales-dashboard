@@ -4,6 +4,8 @@
 
 A mobile-friendly sales dashboard for The Bakery Shop. It shows how much the shop has sold, what is selling, and what is running out, in a layout designed for one-handed use on a phone behind the counter. Built with plain HTML, CSS and JavaScript (no build step), so it can be hosted directly on GitHub Pages.
 
+**Live site:** <https://macetenth.github.io/bakery-sales-dashboard/> (GitHub Pages, served from `main`)
+
 > **Status: v1.** All numbers are generated sample data. There is no backend yet.
 
 ## Features
