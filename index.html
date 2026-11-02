@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Bakery Shop · Sales Dashboard</title>
+  <meta name="description" content="Mobile-friendly sales dashboard for The Bakery Shop.">
+  <meta name="theme-color" content="#FBF5EC">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Icon sprite: 24px grid, stroke icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 19a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+    <symbol id="i-basket" viewBox="0 0 24 24"><path d="M3 9h18l-2 11H5z"/><path d="M8 9l3-5M16 9l-3-5"/></symbol>
+    <symbol id="i-croissant" viewBox="0 0 24 24"><path d="M2.5 15.5C3.5 10 7.5 6 12 6s8.500 4 9.500 9.500l-3.200 1-1.800-3-3 1-1.500 2.200-1.500-2.200-3-1-1.800 3z"/><path d="M9 7.500l1.500 4M15 7.500l-1.500 4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.600"/><circle cx="12" cy="12" r="1.600"/><circle cx="19" cy="12" r="1.600"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.500"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></symbol>
+    <symbol id="i-flat" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <img class="logo" src="assets/logo.png" alt="The Bakery Shop — Fresh &amp; Delicious, est. 2022" width="80" height="64">
+  <div class="topbar-right">
+    <span class="date" id="today-date"></span>
+    <button class="icon-btn" id="bell" type="button" aria-label="Notifications, 3 new">
+      <svg class="ico" aria-hidden="true"><use href="#i-bell"/></svg>
+      <span class="badge-dot" aria-hidden="true">3</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="chips" role="group" aria-label="Time period" id="chips">
+    <button class="chip" type="button" data-period="today" aria-pressed="true">Today</button>
+    <button class="chip" type="button" data-period="week" aria-pressed="false">Week</button>
+    <button class="chip" type="button" data-period="month" aria-pressed="false">Month</button>
+  </div>
+
+  <div class="grid">
+    <!-- Hero -->
+    <section class="hero" id="sales" aria-labelledby="hero-title">
+      <p class="eyebrow" id="hero-title">Today's sales</p>
+      <div class="hero-row">
+        <p class="hero-amount" id="hero-amount">$0.00</p>
+        <span class="pill" id="hero-delta"></span>
+      </div>
+      <p class="hero-sub" id="hero-sub"></p>
+      <svg class="spark" id="spark" viewBox="0 0 300 64" role="img" aria-label="Sales trend"></svg>
+      <p class="hero-updated">Sample data · updated <span id="updated"></span></p>
+    </section>
+
+    <!-- KPI tiles -->
+    <section class="kpis" aria-label="Key numbers" id="kpis"></section>
+
+    <!-- Sales chart -->
+    <section class="card" id="chart-card" aria-labelledby="chart-title">
+      <h2 id="chart-title">Sales by hour</h2>
+      <div class="seg" role="group" aria-label="Compare to" id="cmp-seg"></div>
+      <ul class="legend" id="chart-legend"></ul>
+      <div class="chart-wrap" id="chart" tabindex="0" aria-describedby="chart-summary"></div>
+      <p class="sr-only" id="chart-summary" aria-live="polite"></p>
+      <div id="table-wrap" hidden></div>
+      <button class="btn btn-ghost" id="toggle-table" type="button">Show as table</button>
+    </section>
+
+    <!-- Best sellers -->
+    <section class="card" id="sellers" aria-labelledby="sellers-title">
+      <h2 id="sellers-title">Best sellers</h2>
+      <ol class="rows" id="sellers-list"></ol>
+      <button class="btn btn-secondary" type="button" data-soon>See all products
+        <svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </button>
+    </section>
+
+    <!-- Categories -->
+    <section class="card" id="categories" aria-labelledby="cat-title">
+      <h2 id="cat-title">Sales by category</h2>
+      <div class="donut-wrap">
+        <svg class="donut" id="donut" viewBox="0 0 200 200" role="img" aria-label="Sales share by category"></svg>
+      </div>
+      <ul class="cat-list" id="cat-list"></ul>
+    </section>
+
+    <!-- Low stock -->
+    <section class="card card-alert" id="stock" aria-labelledby="stock-title">
+      <h2 id="stock-title"><svg class="ico ico-inline" aria-hidden="true"><use href="#i-warn"/></svg> Running low <span id="stock-count"></span></h2>
+      <ul class="rows" id="stock-list"></ul>
+    </section>
+  </div>
+</main>
+
+<nav class="bottom-nav" aria-label="Main">
+  <a class="nav-item is-active" href="#top" aria-current="page"><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a>
+  <button class="nav-item" type="button" data-soon><svg class="ico" aria-hidden="true"><use href="#i-receipt"/></svg><span>Orders</span></button>
+  <a class="nav-item" href="#stock"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><span>Stock</span></a>
+  <button class="nav-item" type="button" data-soon><svg class="ico" aria-hidden="true"><use href="#i-more"/></svg><span>More</span></button>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript><p style="padding:24px">This dashboard needs JavaScript to show the sales charts.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>

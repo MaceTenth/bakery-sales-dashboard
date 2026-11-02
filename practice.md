@@ -2,13 +2,13 @@
 
 Working rules for this project (The Bakery Shop sales dashboard). Follow them on every change.
 
-## 1. Commit and push on every approved feature
+## 1. Commit and push automatically
 
-Once a feature is approved, save it right away: commit and push in the same step. Don't batch several approved features into one commit, and don't leave approved work unpushed.
+Commit and push to `origin/main` automatically after each completed change, without waiting to be asked. Don't batch several features into one commit, and don't leave finished work unpushed.
 
-- One approved feature = one commit, pushed to `origin/main`.
-- Write a short commit message that names the feature (e.g. `Add best sellers list`).
-- Only commit work that has been approved. Work still under review stays uncommitted.
+- One feature or change = one commit, pushed to `origin/main`.
+- Write a short commit message that names the change (e.g. `Add best sellers list`).
+- Check `git status` first so only the intended files are staged (no scratch files, no secrets).
 
 ```bash
 git add <files for this feature>
