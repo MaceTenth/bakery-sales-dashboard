@@ -17,8 +17,8 @@ A mobile-friendly sales dashboard for The Bakery Shop. It shows how much the sho
 - **Best sellers:** top 5 products with units sold, revenue and trend.
 - **Sales by category:** donut chart with legend; tap a category to isolate it.
 - **Running low:** products that are low or out of stock.
-- **Responsive:** bottom navigation on phones, side rail on desktop. Buttons and tap targets are at least 56 px, icons at least 32 px.
-- **Brand colours:** palette taken from the logo, plus a complementary teal. Chart colours are checked for colour-blind separation.
+- **Responsive:** bottom navigation on phones, side rail on desktop. Large touch targets: chips 68 px, buttons 72–80 px, nav 84 px (nothing under 56 px), icons at least 32 px, and a 96 px logo in the header.
+- **Brand colours:** logo browns and orange for text and product colours, with green as the main interface colour (chips, buttons, hero card, nav). Chart colours (green and plum, plus orange and blue in the donut) are checked for colour-blind separation.
 
 ### Not built yet
 

@@ -9,7 +9,8 @@ const money0 = n => '$' + Math.round(n).toLocaleString('en-US');
 const sum = a => a.reduce((s, v) => s + v, 0);
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const COLORS = { today: '#BA713C', compare: '#0F8BA6', gold: '#A8851E', plum: '#7E5C99' };
+// Series colours (green is the brand accent; orange only appears where it is not next to green).
+const COLORS = { today: '#3F7D3A', compare: '#7E5C99', orange: '#BA713C', blue: '#1F7FB5' };
 const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -94,10 +95,10 @@ const PRODUCTS = [
   { name: 'Flat White', cat: 'Drinks', icon: '☕', units: 31, price: 4.2, trend: 2 }
 ];
 const CATEGORIES = [
-  { name: 'Bread', share: 0.34, color: COLORS.today },
+  { name: 'Bread', share: 0.34, color: COLORS.orange },
   { name: 'Pastry', share: 0.31, color: COLORS.compare },
-  { name: 'Cake', share: 0.18, color: COLORS.gold },
-  { name: 'Drinks', share: 0.17, color: COLORS.plum }
+  { name: 'Cake', share: 0.18, color: COLORS.today },
+  { name: 'Drinks', share: 0.17, color: COLORS.blue }
 ];
 const LOW_STOCK = [
   { name: 'Almond Croissant', icon: '🥐', left: 4, par: 24 },
@@ -175,9 +176,9 @@ function renderHero(s) {
   const [px, py] = pts[s.peakIdx];
   $('#spark').setAttribute('aria-label', `Sales trend, highest at ${p.peak(s.peakIdx)}`);
   $('#spark').innerHTML =
-    `<path d="${line}L298,62L2,62Z" fill="#BA713C" opacity=".35"/>` +
+    `<path d="${line}L298,62L2,62Z" fill="#E8B66B" opacity=".22"/>` +
     `<path d="${line}" fill="none" stroke="#E8B66B" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>` +
-    `<circle cx="${px}" cy="${py}" r="5" fill="#E8B66B" stroke="#5A3619" stroke-width="2"/>`;
+    `<circle cx="${px}" cy="${py}" r="5" fill="#E8B66B" stroke="#2D5A2A" stroke-width="2"/>`;
 }
 
 function renderKpis(s) {
@@ -257,7 +258,7 @@ function renderChart() {
 
   box.innerHTML =
     `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${p.chartTitle}: ${p.cur.length} bars, today versus ${c.name.toLowerCase()}">
-       ${g}<rect id="hv" x="0" y="${mt}" width="${gW}" height="${plotH}" rx="6" fill="#DAC6B1" opacity=".45" visibility="hidden"/>
+       ${g}<rect id="hv" x="0" y="${mt}" width="${gW}" height="${plotH}" rx="6" fill="#CFE3C8" opacity=".6" visibility="hidden"/>
        ${bars}${line}${peak}${xl}
        <rect id="hit" x="${ml}" y="0" width="${plotW}" height="${H}" fill="transparent"/>
      </svg>
